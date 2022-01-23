@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Table, Button } from 'semantic-ui-css';
+import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -10,10 +10,19 @@ export default function Read() {
             setApiDate(getData.data);
         })
     }, [])
-    const setData = (id, firstName, lastName) => {
+    const setData = (id, Product, SKUId, ShopName, GSTregisteration, FSSAI_Licence, Total_weight, Package_dimension, Full_address, Pin_code, ShippingPlatform, Phone_No) => {
         localStorage.setItem('ID', id);
-        localStorage.setItem('firstName', firstName);
-        localStorage.setItem('lastName', lastName);
+        localStorage.setItem('Product', Product);
+        localStorage.setItem('SKUId', SKUId);
+        localStorage.setItem('ShopName', ShopName);
+        localStorage.setItem('GSTregisteration', GSTregisteration);
+        localStorage.setItem('FSSAI_Licence', FSSAI_Licence);
+        localStorage.setItem('Total_weight', Total_weight);
+        localStorage.setItem('Package_dimension', Package_dimension);
+        localStorage.setItem('Full_address', Full_address);
+        localStorage.setItem('Pin_code', Pin_code);
+        localStorage.setItem('ShippingPlatform', ShippingPlatform);
+        localStorage.setItem('Phone_No', Phone_No);
     }
     const getData = () => {
         axios.get(`https://61e1b1183050a10017681f5f.mockapi.io/crud`).then((getData) => {
@@ -27,48 +36,65 @@ export default function Read() {
     }
     return (
         <div>
-            <Table celled>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>S.No</Table.HeaderCell>
-                        <Table.HeaderCell>First Name</Table.HeaderCell>
-                        <Table.HeaderCell>Last Name</Table.HeaderCell>
-                        <Table.HeaderCell>Update</Table.HeaderCell>
-                        <Table.HeaderCell>Delete</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>ProductName</th>
+                        <th>SKUId</th>
+                        <th>ShopName</th>
+                        <th>GSTregisteration</th>
+                        <th>FSSAI_Licence</th>
+                        <th>Total_weight</th>
+                        <th>Package_dimension</th>
+                        <th>Full_address</th>
+                        <th>Pin_code</th>
+                        <th>ShippingPlatform</th>
+                        <th>Phone_No</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {apiData.map((data) => {
                         return (
-                            <Table.Row>
-                                <Table.Cell>{data.id}</Table.Cell>
-                                <Table.Cell>{data.firstName}</Table.Cell>
-                                <Table.Cell>{data.lastName}</Table.Cell>
-                                <Table.Cell>
+                            <tr>
+                                <td>{data.id}</td>
+                                <td>{data.Product}</td>
+                                <td>{data.SKUId}</td>
+                                <td>{data.ShopName}</td>
+                                <td>{data.GSTregisteration}</td>
+                                <td>{data.FSSAI_Licence}</td>
+                                <td>{data.Total_weight}</td>
+                                <td>{data.Package_dimension}</td>
+                                <td>{data.Full_address}</td>
+                                <td>{data.Pin_code}</td>
+                                <td>{data.ShippingPlatform}</td>
+                                <td>{data.Phone_No}</td>
+                                <td>
                                     <Link to='/update'>
                                         <Button color="green" onClick={() => {
-                                            setData(data.id, data.firstName, data.lastName)
+                                            setData(data.id, data.Product, data.SKUId, data.ShopName, data.GSTregisteration, data.FSSAI_Licence, data.Total_weight, data.Package_dimension, data.Full_address, data.Pin_code, data.ShippingPlatform, data.Phone_No)
                                         }}>
                                             Update
                                         </Button>
                                     </Link>
-                                </Table.Cell>
-                                <Table.Cell>
+                                </td>
+                                <td>
                                     <Button color="Red" onClick={() => {
                                         onDelete(data.id)
                                     }}>
                                         Delete
                                     </Button>
-                                </Table.Cell>
-                            </Table.Row>
+                                </td>
+                            </tr>
                         )
                     })}
-                </Table.Body>
+                </tbody>
                 <Link to='/'>
-                    <Button color='yellow'> Create New Form</Button>
+                    <Button> Create New Form</Button>
                 </Link>
-        </Table>
+            </Table>
         </div >
     )
 }

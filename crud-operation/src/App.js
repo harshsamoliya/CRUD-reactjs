@@ -3,6 +3,8 @@ import Create from './components/create/create';
 import Read from './components/read/read';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Update from './components/update/update';
+import "bootstrap/dist/css/bootstrap.css";
+import 'react-bootstrap';
 
 function App() {
   return (
