@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 

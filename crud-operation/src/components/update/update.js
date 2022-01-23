@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-css';
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+
+
 export default function Update() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
