@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -27,25 +27,24 @@ export default function Read() {
     }
     return (
         <div>
-            <Table celled>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>S.No</Table.HeaderCell>
-                        <Table.HeaderCell>First Name</Table.HeaderCell>
-                        <Table.HeaderCell>Last Name</Table.HeaderCell>
-                        <Table.HeaderCell>Update</Table.HeaderCell>
-                        <Table.HeaderCell>Delete</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {apiData.map((data) => {
                         return (
-                            <Table.Row>
-                                <Table.Cell>{data.id}</Table.Cell>
-                                <Table.Cell>{data.firstName}</Table.Cell>
-                                <Table.Cell>{data.lastName}</Table.Cell>
-                                <Table.Cell>
+                            <tr>
+                                <td>{data.id}</td>
+                                <td>{data.firstName}</td>
+                                <td>{data.lastName}</td>
+                                <td>
                                     <Link to='/update'>
                                         <Button color="green" onClick={() => {
                                             setData(data.id, data.firstName, data.lastName)
@@ -53,22 +52,22 @@ export default function Read() {
                                             Update
                                         </Button>
                                     </Link>
-                                </Table.Cell>
-                                <Table.Cell>
+                                </td>
+                                <td>
                                     <Button color="Red" onClick={() => {
                                         onDelete(data.id)
                                     }}>
                                         Delete
                                     </Button>
-                                </Table.Cell>
-                            </Table.Row>
+                                </td>
+                            </tr>
                         )
                     })}
-                </Table.Body>
+                </tbody>
                 <Link to='/'>
-                    <Button color='yellow'> Create New Form</Button>
+                    <Button> Create New Form</Button>
                 </Link>
-        </Table>
+            </Table>
         </div >
     )
 }

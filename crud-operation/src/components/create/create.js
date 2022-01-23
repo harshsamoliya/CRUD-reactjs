@@ -1,39 +1,40 @@
-import {React,useState} from 'react';
-import {Form ,Button} from 'semantic-ui-react';
+import { React, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Create() {
     let navigate = useNavigate();
-    const [firstName,setFirstName] = useState('');
-    const [lastName,setLastName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
-    const sendDataToApi = ()=>{
-        axios.post(`https://61e1b1183050a10017681f5f.mockapi.io/crud`,{
-            firstName,lastName
-        }).then(()=>{
+    const sendDataToApi = () => {
+        axios.post(`https://61e1b1183050a10017681f5f.mockapi.io/crud`, {
+            firstName, lastName
+        }).then(() => {
             navigate('/read');
         })
     }
     return (
         <div>
+
             <Form>
-                <Form.Field>
-                    <label>First Name</label>
-                    <input name = 'fname' onChange={(e)=>{
+                <Form.Group className="mb-3" >
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control type="email" placeholder="Enter First Name" onChange={(e) => {
                         setFirstName(e.target.value)
-                    }} placeholder='First Name' />
-                </Form.Field>
-                <Form.Field>
-                    <label>Last Name</label>
-                    <input name='lname'
-                    onChange={(e)=>{
+                    }} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" >
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter First Name" onChange={(e) => {
                         setLastName(e.target.value)
-                    }} 
-                    placeholder='Last Name' />
-                </Form.Field>
+                    }} />
+                </Form.Group>
                 <Button type='submit' onClick={sendDataToApi}>Submit</Button>
             </Form>
         </div>
+
     )
 }
